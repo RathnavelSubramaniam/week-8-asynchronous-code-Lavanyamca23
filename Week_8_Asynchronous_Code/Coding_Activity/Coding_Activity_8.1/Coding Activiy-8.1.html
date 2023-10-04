@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* body{
+            background-color: lightcoral;
+        } */
+    </style>
+</head>
+<body>
+    <script>
+   const my_Array=['https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=a7310cd32ecc3e096c352ef39006567c','https://api.openweathermap.org/data/2.5/weather?q=Houston&APPID=a7310cd32ecc3e096c352ef39006567c','https://api.openweathermap.org/data/2.5/weather?q=Lisbon&APPID=a7310cd32ecc3e096c352ef39006567c','https://api.openweathermap.org/data/2.5/weather?q=Baltimore&APPID=a7310cd32ecc3e096c352ef39006567c']
+        const makeRequest=async function(url){
+            let response=await fetch(url);
+            let data=await response.text();
+            //console.log(data)
+            return data
+        }
+
+        var dataArr=[]
+        my_Array.forEach((item,k)=>{
+            makeRequest(item).then((result)=>{
+                dataArr.push(result)
+                if(dataArr.length==4){
+                    for(let i=0;i<4;i++){
+                        console.log(JSON.parse(dataArr[i]).name)
+                if(JSON.parse(dataArr[i]).name=="Lisbon"){
+                    create(dataArr[i])
+                }
+                    }
+                }
+
+            })
+        })
+
+        function create(data){
+            let d=document.createElement("div")
+            d.innerHTML=data
+            
+            d.style.border='4px solid red'
+            d.style.width='1300px'
+            d.style.height='150px'
+            d.style.padding='10px'
+            d.style.margin='10px'
+            d.style.color='blue'
+            d.style.fontSize='20px'
+            d.style.fontFamily='cursive'
+            d.style.borderRadius='10px'
+            d.style.boxShadow='0px 12px 15px rgba(0,0,0,0.3)'
+            
+
+            document.body.appendChild(d)
+        }
+    </script>
+</body>
+</html>
